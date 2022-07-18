@@ -49,20 +49,14 @@ RSpec.describe 'application show page' do
     visit "/applications/#{@application.id}"
     fill_in 'pet_name', with: "Lobster"
     click_button "Search"
-    
-    within "#pet-#{@pet_1.id}" do 
+
+    within "#pet-#{@pet_1.id}" do
     click_on "Adopt this Pet"
     end
 
-<<<<<<< HEAD
-    expect(current_path).to eq("/applications/#{@application.id}") 
-    expect(page).to have_content("Lobster")
-  end 
-=======
     expect(current_path).to eq("/applications/#{@application.id}")
-    expect(page).to have_button("Adopt this Pet")
+    expect(page).to have_content("Lobster")
   end
->>>>>>> 5ee58a297e6465c49774285917b07e530a1d4983
 
 
 end
