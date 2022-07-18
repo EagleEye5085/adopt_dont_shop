@@ -23,10 +23,8 @@ ActiveRecord::Schema.define(version: 2022_07_17_180317) do
     t.integer "address_zip_code"
     t.string "description"
     t.string "status"
-    t.bigint "pet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pet_id"], name: "index_applications_on_pet_id"
   end
 
   create_table "pet_applications", force: :cascade do |t|
@@ -46,8 +44,6 @@ ActiveRecord::Schema.define(version: 2022_07_17_180317) do
     t.bigint "shelter_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "application_id"
-    t.index ["application_id"], name: "index_pets_on_application_id"
     t.index ["shelter_id"], name: "index_pets_on_shelter_id"
   end
 
@@ -78,10 +74,8 @@ ActiveRecord::Schema.define(version: 2022_07_17_180317) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "applications", "pets"
   add_foreign_key "pet_applications", "applications"
   add_foreign_key "pet_applications", "pets"
-  add_foreign_key "pets", "applications"
   add_foreign_key "pets", "shelters"
   add_foreign_key "veterinarians", "veterinary_offices"
 end

@@ -8,7 +8,7 @@ class CreateApplications < ActiveRecord::Migration[5.2]
       t.integer :address_zip_code
       t.string :description
       t.string :status
-      t.references :pet, foreign_key: true
+      
 
       t.timestamps
     end
