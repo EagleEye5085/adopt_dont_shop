@@ -50,7 +50,7 @@ RSpec.describe 'application show page' do
     fill_in 'pet_name', with: "Lobster"
     click_button "Search"
 
-    within "#pet-#{@pet_1.id}" do
+    within "#pet-#{@pet_2.id}" do
     click_on "Adopt this Pet"
     end
 
