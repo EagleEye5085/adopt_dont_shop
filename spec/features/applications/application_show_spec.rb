@@ -4,8 +4,10 @@ RSpec.describe 'application show page' do
   before :each do
     @application = Application.create!(name: "Thomas Turner", address_street: "234 Sands St.", address_city: "Chicago", address_state: "Illinois", address_zip_code: 60007, description: "I love pets and have lots of space in the back yard", status: "pending")
     shelter = Shelter.create(name: 'Mystery Building', city: 'Irvine CA', foster_program: false, rank: 9)
-    @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Bare-y Manilow', application_id: @application.id, shelter_id: shelter.id)
-    @pet_2 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter.id, application_id: nil)
+    @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Bare-y Manilow', shelter_id: shelter.id)
+    @pet_2 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter.id)
+
+    PetApplication.create!(pet_id: @pet_1.id, application_id: @application.id)
 
   end
 
@@ -42,8 +44,7 @@ RSpec.describe 'application show page' do
     expect(current_path).to eq("/applications/#{@application.id}")
   end
 
-  it "can add a pet to an application" do 
-    PetApplication.create!(pet_id: @pet_1.id, application_id: @application.id)
+  it "can add a pet to an application" do
 
     visit "/applications/#{@application.id}"
     fill_in 'pet_name', with: "Lobster"
@@ -53,9 +54,15 @@ RSpec.describe 'application show page' do
     click_on "Adopt this Pet"
     end
 
+<<<<<<< HEAD
     expect(current_path).to eq("/applications/#{@application.id}") 
     expect(page).to have_content("Lobster")
   end 
+=======
+    expect(current_path).to eq("/applications/#{@application.id}")
+    expect(page).to have_button("Adopt this Pet")
+  end
+>>>>>>> 5ee58a297e6465c49774285917b07e530a1d4983
 
 
 end
