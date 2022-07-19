@@ -35,7 +35,7 @@ class PetsController < ApplicationController
     if params[:commit] == "Approve Pet"
       @application = Application.find(params[:application])
       pet.update(pet_params)
-      redirect_to "/applications/admin/#{@application.id}"
+      redirect_to "/admin/applications/#{@application.id}"
     elsif pet.update(pet_params)
       redirect_to "/pets/#{pet.id}"
     else
