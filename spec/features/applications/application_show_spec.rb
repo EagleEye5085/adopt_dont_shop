@@ -65,11 +65,11 @@ RSpec.describe 'application show page' do
   end
 
   it 'admin - when pet approved, approve button replaced with approved indecator' do
-    visit "/applications/admin/#{@application.id}"
+    visit "/admin/applications/#{@application.id}"
 
     click_button("Approve Pet")
 
-    expect(current_path).to eq("/applications/admin/#{@application.id}")
+    expect(current_path).to eq("/admin/applications/#{@application.id}")
     # expect(@pet_1.adoptable).to eq(false)
     expect(page).to have_content("Approved")
 
