@@ -58,5 +58,21 @@ RSpec.describe 'application show page' do
     expect(page).to have_content("Lobster")
   end
 
+  it 'admin has a button to aprove pets on an application' do
+    visit "/applications/admin/#{@application.id}"
+
+    expect(page).to have_button("Approve Pet")
+  end
+
+  it 'admin - when pet approved, approve button replaced with approved indecator' do
+    visit "/applications/admin/#{@application.id}"
+
+    click_button("Approve Pet")
+
+    expect(current_path).to eq("/applications/admin/#{@application.id}")
+    # expect(@pet_1.adoptable).to eq(false)
+    expect(page).to have_content("Approved")
+
+  end
 
 end
