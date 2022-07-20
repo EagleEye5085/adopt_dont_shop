@@ -31,12 +31,9 @@ class PetsController < ApplicationController
   end
 
   def update
+
     pet = Pet.find(params[:id])
-    if params[:commit] == "Approve Pet"
-      @application = Application.find(params[:application])
-      pet.update(pet_params)
-      redirect_to "/admin/applications/#{@application.id}"
-    elsif pet.update(pet_params)
+    if pet.update(pet_params)
       redirect_to "/pets/#{pet.id}"
     else
       redirect_to "/pets/#{pet.id}/edit"

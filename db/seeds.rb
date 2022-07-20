@@ -53,4 +53,4 @@ pet_5 = Pet.create(adoptable: false, age: 3, breed: 'Whippet', name: 'Annabelle'
 pet_6 = Pet.create(adoptable: true, age: 3, breed: 'GSD', name: 'Charlie')
 
 
-PetApplication.create!(pet_id: @pet_1.id, application_id: @application.id)
+PetApplication.create!(status: "pending",pet_id: @pet_1.id, application_id: @application.id)

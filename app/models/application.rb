@@ -12,4 +12,10 @@ class Application < ApplicationRecord
   has_many :pets, through: :pet_applications
 
   attribute :status, :string, default: "In Progress"
+
+  def pet_approved
+  end
+
+  def pet_rejected
+  end
 end

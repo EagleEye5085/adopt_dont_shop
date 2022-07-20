@@ -9,16 +9,23 @@
   <p>zip code: <%= @application.address_zip_code %> </p>
 
   <h3> Pets Applied for </h3>
-  <% @application.pets.each do |pet| %>
-    <%= link_to "#{pet.name}","/pets/#{pet.id}" %>
-    <% if pet.adoptable %>
-      <%= form_with url: "/pets/#{pet.id}", method: :patch, local: true do |f| %>
-        <%= f.hidden_field :adoptable, value: false %>
-        <%= f.hidden_field :application, value: "#{@application.id}" %>
-        <p><%= f.submit "Approve Pet"%></p>
+  <% @application.pet_applications.each do |pet_application| %>
+
+    <%= link_to "#{pet_application.pet.name}","/pets/#{pet_application.pet_id}" %>
+
+    <p>Status: <%= pet_application.status  %></p>
+
+    <% if pet_application.status == "pending" %>
+      <%= form_with url: "/pet_application/#{pet_application.id}", method: :patch, local: true do |f| %>
+        <%= f.hidden_field :pet_id, value: "#{pet_application.pet_id}" %>
+        <%= f.hidden_field :application_id, value: "#{@application.id}" %>
+     <p><%= f.submit "Approve Pet"%></p>
+     <p><%= f.submit "Reject Pet"%></p>
       <% end %>
-    <% else %>
-      <p><%= "Approved" %></p>
+    <% elsif pet_application.status == "approved"%>
+     <p><%= pet_application.status%> </p>
+    <% elsif  pet_application.status == "rejected"%>
+     <p><%= pet_application.status%> </p>
     <% end %>
   <% end %>
 
