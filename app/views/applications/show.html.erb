@@ -28,10 +28,13 @@
  <% @pets.each do |pet| %>
   <div id="pet-<%= pet.id %>">
      <p><%= pet.name %>
-     <%= button_to "Adopt this Pet", "/pet_applications/#{@application.id}/#{pet.id}", method: :post %></p>
+       <%= form_with url: "/pet_applications/#{@application.id}/#{pet.id}", method: :post, local: true do |form| %>
+          <%= form.hidden_field :status, value: "Pending" %>
+          <%= form.submit "Adopt this Pet" %>
+       <% end %></p>
   </div>
   <% end %>
-  
+
   <h3>Status</h3>
   <p> <%= @application.status %> </p>
 

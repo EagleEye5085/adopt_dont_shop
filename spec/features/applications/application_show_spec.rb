@@ -7,7 +7,7 @@ RSpec.describe 'application show page' do
     @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Bare-y Manilow', shelter_id: shelter.id)
     @pet_2 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: shelter.id)
 
-    PetApplication.create!(pet_id: @pet_1.id, application_id: @application.id)
+    PetApplication.create!(status: "pending", pet_id: @pet_1.id, application_id: @application.id)
 
   end
 
@@ -59,7 +59,7 @@ RSpec.describe 'application show page' do
   end
 
   it 'admin has a button to aprove pets on an application' do
-    visit "/applications/admin/#{@application.id}"
+    visit "/admin/applications/#{@application.id}"
 
     expect(page).to have_button("Approve Pet")
   end
@@ -70,8 +70,23 @@ RSpec.describe 'application show page' do
     click_button("Approve Pet")
 
     expect(current_path).to eq("/admin/applications/#{@application.id}")
-    # expect(@pet_1.adoptable).to eq(false)
-    expect(page).to have_content("Approved")
+    expect(page).to have_content("approved")
+
+  end
+
+  it 'admin has a button to reject pets on an application' do
+    visit "/admin/applications/#{@application.id}"
+
+    expect(page).to have_button("Reject Pet")
+  end
+
+  it 'admin - when pet rejected, reject button replaced with rejected indecator' do
+    visit "/admin/applications/#{@application.id}"
+
+    click_button("Reject Pet")
+
+    expect(current_path).to eq("/admin/applications/#{@application.id}")
+    expect(page).to have_content("rejected")
 
   end
 
