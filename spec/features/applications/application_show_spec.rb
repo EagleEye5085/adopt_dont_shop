@@ -59,7 +59,7 @@ RSpec.describe 'application show page' do
   end
 
   it 'admin has a button to aprove pets on an application' do
-    visit "/applications/admin/#{@application.id}"
+    visit "/admin/applications/#{@application.id}"
 
     expect(page).to have_button("Approve Pet")
   end
