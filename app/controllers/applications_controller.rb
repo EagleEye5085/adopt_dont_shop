@@ -1,4 +1,8 @@
 class ApplicationsController < ApplicationController
+  def admin_show
+    @application = Application.find(params[:id])
+  end
+
   def show
     @application = Application.find(params[:id])
     @admin = params[:admin]
